@@ -2,6 +2,7 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 import { login } from '@/api/user'
 export default {
   namespaced: true,
+
   state: {
     token: getToken()
   },
