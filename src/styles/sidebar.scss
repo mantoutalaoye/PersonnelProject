@@ -10,7 +10,8 @@
   .sidebar-container {
     transition: width 0.28s;
     width: $sideBarWidth !important;
-    background-color: $menuBg;
+    // 侧边栏背景颜色
+    background: linear-gradient(0deg, rgba(116,208,155,1) 0%, rgba(59,184,207,1) 100%);
     height: 100%;
     position: fixed;
     font-size: 0px;

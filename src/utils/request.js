@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import router from '@/router'
+// import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
@@ -20,8 +21,9 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+      config.headers['Authorization'] = `Bearer ${store.getters.token}`
     }
+
     return config
   },
   error => {
@@ -43,8 +45,15 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error) // for debug
-    Message.error(error.message) // 提示错误信息
+    // error 信息 里面 response的对象
+    if (error.response && error.response.data && error.response.data.code === 10002) {
+    // 当等于10002的时候 表示 后端告诉我token超时了
+      store.dispatch('user/logout') // 登出action 删除token
+      router.push('/login')
+    } else {
+      console.log('err' + error) // for debug
+      Message.error(error.message) // 提示错误信息
+    }
     return Promise.reject(error) // 返回执行错误 让当前的执行链跳出成功 直接进入 catch
   }
 )

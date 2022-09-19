@@ -1,29 +1,30 @@
 <template>
   <div class="navbar">
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-
-    <breadcrumb class="breadcrumb-container" />
+    <div class="app-breadcrumb">
+      馒头他姥爷科技有限公司
+      <span class="breadBtn">体验版</span>
+    </div>
+    <!-- <breadcrumb class="breadcrumb-container" /> -->
 
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img :src="userInfo.staffPhoto" class="user-avatar">
+          <span class="name">{{ userInfo.username }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
             <el-dropdown-item>
-              Home
+              首页
             </el-dropdown-item>
           </router-link>
           <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
+            <el-dropdown-item>项目地址</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">Log Out</span>
+            <span style="display:block;">退出登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -32,20 +33,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
+import { mapGetters, mapState } from 'vuex'
+// import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 
 export default {
   components: {
-    Breadcrumb,
+    // Breadcrumb,
     Hamburger
   },
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
-    ])
+      'avatar',
+      'userInfo'
+    ]),
+    ...mapState(['user'])
+  },
+  created() {
+    console.log(this.user)
   },
   methods: {
     toggleSideBar() {
@@ -53,7 +59,7 @@ export default {
     },
     async logout() {
       await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      this.$router.push(`/login`)
     }
   }
 }
@@ -64,9 +70,23 @@ export default {
   height: 50px;
   overflow: hidden;
   position: relative;
-  background: #fff;
+   background   : rgba(59,184,207,1);
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
-
+  .app-breadcrumb{
+    display: inline-block;
+    line-height: 50px;
+    color: #fff;
+    margin-left: 10px;
+    span{
+      margin-left: 10px;
+      font-size: 13px;
+      border-radius: 10px;
+      display: inline-block;
+      line-height: 20px;
+      padding: 3px 8px;
+      background-color: rgb(53, 160, 241);
+    }
+  }
   .hamburger-container {
     line-height: 46px;
     height: 100%;
@@ -113,23 +133,25 @@ export default {
 
     .avatar-container {
       margin-right: 30px;
-
       .avatar-wrapper {
-        margin-top: 5px;
-        position: relative;
-
+        position: relati  ve;
+        display: flex;
+        align-items: center;
         .user-avatar {
           cursor: pointer;
           width: 40px;
           height: 40px;
-          border-radius: 10px;
+          border-radius: 6px;
         }
-
+        .name{
+          color: #fff;
+          margin-left: 5px;
+        }
         .el-icon-caret-bottom {
+          color: #fff !important;
           cursor: pointer;
           position: absolute;
           right: -20px;
-          top: 25px;
           font-size: 12px;
         }
       }

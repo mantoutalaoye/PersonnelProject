@@ -110,11 +110,11 @@ export default {
     },
     handleLogin() {
       // 完整表单的整体校验
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
           this.loading = true
           try {
-            this.$store.dispatch('user/login', this.loginForm)
+            await this.$store.dispatch('user/login', this.loginForm)
             this.$router.push('/')
             this.loading = false
           } catch (error) {
@@ -126,6 +126,7 @@ export default {
         }
       })
     }
+
   }
 }
 </script>

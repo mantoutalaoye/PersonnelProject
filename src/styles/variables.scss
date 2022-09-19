@@ -1,14 +1,19 @@
 // sidebar
-$menuText:#bfcbd9;
-$menuActiveText:#409EFF;
+//字体颜色
+$menuText:#000;
+//选中item字体颜色
+$menuActiveText:#fff;
+//选中二级目录父字体颜色
 $subMenuActiveText:#f4f4f5; //https://github.com/ElemeFE/element/issues/12951
-
-$menuBg:#304156;
-$menuHover:#263445;
-
-$subMenuBg:#1f2d3d;
-$subMenuHover:#001528;
-
+//item背景颜色
+$menuBg:rgb(0,0,0,0);
+//item悬停背景颜色
+$menuHover:#5780e9;
+//二级目录背景颜色
+$subMenuBg:rgb(0,0,0,0);
+//二级目录悬停背景颜色
+$subMenuHover:#5780e9;
+//侧边栏宽度
 $sideBarWidth: 210px;
 
 // the :export directive is the magic sauce for webpack
