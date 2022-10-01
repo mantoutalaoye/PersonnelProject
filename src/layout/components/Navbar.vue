@@ -42,6 +42,11 @@ export default {
     // Breadcrumb,
     Hamburger
   },
+  data() {
+    return {
+      // defaultImg: require('@/./assets/common/head.jpg')
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
@@ -70,7 +75,7 @@ export default {
   height: 50px;
   overflow: hidden;
   position: relative;
-   background   : rgba(59,184,207,1);
+  background: linear-gradient(left,#3bb8cf 20%,#5AC5B3 80%);
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
   .app-breadcrumb{
     display: inline-block;

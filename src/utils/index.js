@@ -115,3 +115,21 @@ export function param2Obj(url) {
   })
   return obj
 }
+
+export function tranListToTreeData(list, rootValue) {
+  var arr = []
+  list.forEach(item => {
+    // 如果pid为空
+    if (item.pid === rootValue || item === null) {
+      // 查找id，找到全部pid与item.id相同的，下一级这里的item.id是子级的子级的id是唯一的pid没有与之匹配的，
+      // 所以下一次不会再触发tranListToTreeData函数
+      var children = tranListToTreeData(list, item.id)
+
+      if (children.length) {
+        item.children = children
+      }
+      arr.push(item)
+    }
+  })
+  return arr
+}

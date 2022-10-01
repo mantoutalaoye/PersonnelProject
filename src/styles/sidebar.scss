@@ -11,7 +11,7 @@
     transition: width 0.28s;
     width: $sideBarWidth !important;
     // 侧边栏背景颜色
-    background: linear-gradient(0deg, rgba(116,208,155,1) 0%, rgba(59,184,207,1) 100%);
+    background: #3bb8cf;
     height: 100%;
     position: fixed;
     font-size: 0px;
@@ -206,8 +206,8 @@
     }
   }
 
-  // the scroll bar appears when the subMenu is too long
-  >.el-menu--popup {
+  // 二级菜单样式 the scroll bar appears when the subMenu is too long
+  .el-menu--popup {
     max-height: 100vh;
     overflow-y: auto;
 
